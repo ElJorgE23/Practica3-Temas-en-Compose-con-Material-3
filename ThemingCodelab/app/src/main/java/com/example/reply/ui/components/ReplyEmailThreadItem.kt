@@ -6,17 +6,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
@@ -33,13 +34,20 @@ fun ReplyEmailThreadItem(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .background(MaterialTheme.colorScheme.background)
-            .padding(20.dp)
+            .background(
+                color = MaterialTheme.colorScheme.background,
+                shape = MaterialTheme.shapes.medium
+            )
+            .padding(16.dp)
     ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             ReplyProfileImage(
                 drawableResource = email.sender.avatar,
                 description = email.sender.fullName,
+                modifier = Modifier.size(40.dp)
             )
             Column(
                 modifier = Modifier
@@ -47,12 +55,10 @@ fun ReplyEmailThreadItem(
                     .padding(horizontal = 12.dp, vertical = 4.dp),
                 verticalArrangement = Arrangement.Center
             ) {
-                // Estilo de tipografía 'labelMedium' aplicado al nombre del remitente
                 Text(
                     text = email.sender.firstName,
                     style = MaterialTheme.typography.labelMedium
                 )
-                // Estilo de tipografía 'labelMedium' aplicado al tiempo transcurrido
                 Text(
                     text = stringResource(id = R.string.twenty_mins_ago),
                     style = MaterialTheme.typography.labelMedium
@@ -60,8 +66,7 @@ fun ReplyEmailThreadItem(
             }
             IconButton(
                 onClick = { /*Click Implementation*/ },
-                modifier = Modifier
-                    .clip(CircleShape)
+                modifier = Modifier.clip(CircleShape)
             ) {
                 Icon(
                     imageVector = if (email.isStarred) Icons.Default.Star else Icons.Default.StarBorder,
@@ -71,14 +76,12 @@ fun ReplyEmailThreadItem(
             }
         }
 
-        // Estilo de tipografía 'bodyMedium' aplicado al asunto del correo
         Text(
             text = email.subject,
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(top = 12.dp, bottom = 8.dp)
         )
 
-        // Estilo de tipografía 'bodyLarge' aplicado al cuerpo del correo
         Text(
             text = email.body,
             style = MaterialTheme.typography.bodyLarge,
@@ -95,17 +98,13 @@ fun ReplyEmailThreadItem(
                 onClick = { /*Click Implementation*/ },
                 modifier = Modifier.weight(1f),
             ) {
-                Text(
-                    text = stringResource(id = R.string.reply),
-                )
+                Text(text = stringResource(id = R.string.reply))
             }
             Button(
                 onClick = { /*Click Implementation*/ },
                 modifier = Modifier.weight(1f),
             ) {
-                Text(
-                    text = stringResource(id = R.string.reply_all),
-                )
+                Text(text = stringResource(id = R.string.reply_all))
             }
         }
     }

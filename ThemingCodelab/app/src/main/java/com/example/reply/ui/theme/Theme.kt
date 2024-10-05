@@ -15,8 +15,17 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.core.view.WindowCompat
 
+// Definición de la tipografía
+val typography = androidx.compose.material3.Typography(
+    // Puedes definir diferentes estilos de texto aquí
+)
 
+// Definición de las formas
+val shapes = androidx.compose.material3.Shapes(
+    // Puedes definir formas personalizadas aquí
+)
 
+// Definición de los esquemas de colores
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
@@ -109,6 +118,8 @@ fun AppTheme(
 
     MaterialTheme(
         colorScheme = colors,
+        typography = typography,
+        shapes = Shapes,
         content = content
     )
 }
