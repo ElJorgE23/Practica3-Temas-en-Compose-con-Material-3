@@ -1,19 +1,3 @@
-/*
- * Copyright 2022 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.reply.ui
 
 import androidx.activity.compose.BackHandler
@@ -31,6 +15,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -42,7 +27,6 @@ import com.example.reply.ui.components.ReplyEmailListItem
 import com.example.reply.ui.components.ReplyEmailThreadItem
 import com.example.reply.ui.components.ReplySearchBar
 
-
 @Composable
 fun ReplyInboxScreen(
     replyHomeUIState: ReplyHomeUIState,
@@ -50,7 +34,6 @@ fun ReplyInboxScreen(
     navigateToDetail: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
-
     val emailLazyListState = rememberLazyListState()
 
     Box(modifier = modifier.fillMaxSize()) {
@@ -63,7 +46,11 @@ fun ReplyInboxScreen(
         )
 
         LargeFloatingActionButton(
-            onClick = { /*Click Implementation*/ },
+            onClick = {
+                // Implementa aquí la acción al presionar el botón
+                // Por ejemplo, abrir un formulario para crear un nuevo email
+                println("Edit button clicked!") // Cambia esto a tu implementación
+            },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp),
@@ -74,7 +61,6 @@ fun ReplyInboxScreen(
                 modifier = Modifier.size(28.dp)
             )
         }
-
     }
 }
 
@@ -86,6 +72,7 @@ fun ReplyEmailListContent(
     closeDetailScreen: () -> Unit,
     navigateToDetail: (Long) -> Unit
 ) {
+    // Manejamos la lógica de si se debe mostrar el detalle de un email
     if (replyHomeUIState.selectedEmail != null && replyHomeUIState.isDetailOnlyOpen) {
         BackHandler {
             closeDetailScreen()
@@ -134,16 +121,15 @@ fun ReplyEmailDetail(
     onBackPressed: () -> Unit = {}
 ) {
     LazyColumn(
-        modifier = modifier
-            .padding(top = 16.dp)
+        modifier = modifier.padding(top = 16.dp)
     ) {
         item {
             EmailDetailAppBar(email, isFullScreen) {
                 onBackPressed()
             }
         }
-        items(items = email.threads, key = { it.id }) { email ->
-            ReplyEmailThreadItem(email = email)
+        items(items = email.threads, key = { it.id }) { emailThread ->
+            ReplyEmailThreadItem(email = emailThread)
         }
     }
 }
