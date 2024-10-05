@@ -1,4 +1,3 @@
-
 package com.example.reply.ui.components
 
 import androidx.compose.foundation.background
@@ -48,11 +47,15 @@ fun ReplyEmailThreadItem(
                     .padding(horizontal = 12.dp, vertical = 4.dp),
                 verticalArrangement = Arrangement.Center
             ) {
+                // Estilo de tipografía 'labelMedium' aplicado al nombre del remitente
                 Text(
                     text = email.sender.firstName,
+                    style = MaterialTheme.typography.labelMedium
                 )
+                // Estilo de tipografía 'labelMedium' aplicado al tiempo transcurrido
                 Text(
                     text = stringResource(id = R.string.twenty_mins_ago),
+                    style = MaterialTheme.typography.labelMedium
                 )
             }
             IconButton(
@@ -68,14 +71,20 @@ fun ReplyEmailThreadItem(
             }
         }
 
+        // Estilo de tipografía 'bodyMedium' aplicado al asunto del correo
         Text(
             text = email.subject,
-            modifier = Modifier.padding(top = 12.dp, bottom = 8.dp),
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(top = 12.dp, bottom = 8.dp)
         )
 
+        // Estilo de tipografía 'bodyLarge' aplicado al cuerpo del correo
         Text(
             text = email.body,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
